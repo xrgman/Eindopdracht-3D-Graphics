@@ -17,6 +17,7 @@ class GameStateManager {
 		void HandleEvents(bool keys[], bool specialKeys[]);
 		void Update();
 		void Draw();
+		void Idle();
 
 		bool Running() { return m_running; }
 		void Quit() { m_running = false; }

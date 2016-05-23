@@ -6,7 +6,7 @@
 GameStateManager gameManager;
 Camera camera;
 bool keys[255];
-bool specialKeys[109];
+bool specialKeys[255];
 
 
 void onDisplay() {
@@ -20,7 +20,7 @@ void onDisplay() {
 	glMatrixMode(GL_MODELVIEW);
 
 	glLoadIdentity();
-	glTranslatef(camera.posX, -camera.posY, 0);
+	glTranslatef(camera.posX, -camera.posZ, camera.posY);
 	glRotatef(camera.rotX, 1, 0, 0);
 	glRotatef(camera.rotY, 0, 1, 0);
 
@@ -40,6 +40,7 @@ void onDisplay() {
 }
 
 void onIdle() {
+	gameManager.Idle();
 	glutPostRedisplay();
 }
 
@@ -98,7 +99,7 @@ int main(int argc, char* argv[]) {
 	glutCreateWindow("Eindopdracht");
 
 	glEnable(GL_DEPTH_TEST);
-	glutFullScreen();
+	//glutFullScreen();
 	glutSetCursor(GLUT_CURSOR_NONE);
 
 	//Set functions:

@@ -10,6 +10,7 @@ class GameState {
 		virtual void Cleanup() = 0;
 		virtual void HandleEvents(bool keys[], bool specialKeys[]) = 0;
 		virtual void Update() = 0;
+		virtual void Idle() = 0;
 		virtual void Draw() = 0;
 
 	protected: 

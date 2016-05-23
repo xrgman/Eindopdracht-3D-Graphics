@@ -1,11 +1,14 @@
 #include "GameStateManager.h"
 #include "GameState.h"
+#include "PlayState.h"
 
 
 void GameStateManager::Init(Camera * camera)
 {
 	this->camera = camera;
 	Cleanup();
+	states.push_back(new PlayState());
+	states.at(currentState)->Init(this,camera);
 	//Add list of states here
 }
 
@@ -48,3 +51,10 @@ void GameStateManager::Draw()
 	if (!states.empty())
 		states.at(currentState)->Draw();
 }
+
+void GameStateManager::Idle()
+{
+	if (!states.empty())
+		states.at(currentState)->Idle();
+}
+

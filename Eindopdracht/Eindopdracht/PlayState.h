@@ -13,9 +13,13 @@ class PlayState : public GameState {
 		virtual void HandleEvents(bool keys[], bool specialKeys[]) override;
 		virtual void Update() override;
 		virtual void Draw() override;
+		virtual void Idle() override;
+		bool keys[255], specialKeys[255];
 	private:
 		GameStateManager * gameManager;
 		Camera * camera;
+protected:
+	
 };
 
 #endif
