@@ -1,14 +1,19 @@
 #include "PlayState.h"
 #include "GL\freeglut.h"
 #include "Cube.h"
+#include "Model.h"
 
 float lastFrameTime = 0;
 Cube cube = Cube();
+
+
+//Model* bloem = new Model("models/bloemetje/PrimRoseP.obj");
 
 void PlayState::Init(GameStateManager * game, Camera * camera)
 {
 	this->gameManager = game;
 	this->camera = camera;
+	
 }
 
 void PlayState::Cleanup()
@@ -25,8 +30,9 @@ void PlayState::HandleEvents(bool keys[], bool specialKeys[])
 
 void PlayState::Update()
 {
-
+	
 }
+
 
 void PlayState::Draw()
 {
@@ -37,6 +43,8 @@ void PlayState::Draw()
 		glVertex3f(15, -1, 15);
 		glVertex3f(-15, -1, 15);
 	glEnd();
+
+	
 
 	for (int x = -10; x <= 10; x += 5)
 	{

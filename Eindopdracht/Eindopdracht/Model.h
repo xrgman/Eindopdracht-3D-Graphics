@@ -53,6 +53,7 @@ class Model {
 				float texcoordx;
 				float texcoordy;
 				Vec(float, float, float, float, float, float, float, float);
+				~Vec();
 		};
 
 		class ObjGroup {
@@ -74,6 +75,7 @@ class Model {
 
 	public:
 		Model(std::string filename);
+		~Model(void);
 		void draw();
 };
 #endif

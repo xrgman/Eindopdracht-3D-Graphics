@@ -2,12 +2,16 @@
 #include "GL\freeglut.h"
 #include "GameStateManager.h"
 #include "Camera.h"
+#include <vector>
+#include "Model.h"
 
 GameStateManager gameManager;
 Camera camera;
 int width, height;
 bool keys[255];
 bool specialKeys[255];
+
+std::vector<pair<int, Model*> > models;
 
 void onDisplay() {
 	glClearColor(0.6f, 0.6f, 1, 1);
@@ -26,17 +30,21 @@ void onDisplay() {
 	glTranslatef(camera.posX, camera.posZ, camera.posY);
 
 	//Setting light:
-	float pos[4] = { 0.5, 1, -1, 0 };
-	glLightfv(GL_LIGHT0, GL_POSITION, pos);
+	/*float pos[4] = { 0.5, 1, -1, 0 };
+	glLightfv(GL_LIGHT0, GL_POSITION, pos);*/
 
 	//Draw the game state:
-	gameManager.Draw();
+	models[0].second->draw();
+	//gameManager.Draw();
+	
+	glFlush();
+	
 	glutSwapBuffers();
 }
 
 void onIdle() {
 	gameManager.Idle();
-	glutPostRedisplay();
+	
 }
 
 void onKeyboard(unsigned char key, int x, int y) {
@@ -75,7 +83,12 @@ void onMousePassiveMotion(int x, int y) {
 
 void onTimer(int id) {
 	gameManager.Update();
+	glutPostRedisplay();
 	glutTimerFunc(1000 / 60, onTimer, 1);
+}
+
+void loadModels() {
+	models.push_back(pair<int, Model*>(1, new Model("models/bloemetje/PrimRoseP.obj")));
 }
 
 int main(int argc, char* argv[]) {
@@ -91,8 +104,8 @@ int main(int argc, char* argv[]) {
 	glutCreateWindow("Eindopdracht");
 	
 	glEnable(GL_DEPTH_TEST);
-	glEnable(GL_LIGHTING);
-	glEnable(GL_LIGHT0);
+	/*glEnable(GL_LIGHTING);
+	glEnable(GL_LIGHT0);*/
 
 	glutFullScreen();
 	glutSetCursor(GLUT_CURSOR_NONE);
@@ -112,6 +125,8 @@ int main(int argc, char* argv[]) {
 
 	memset(keys, 0, sizeof(keys));
 	memset(specialKeys, 0, sizeof(specialKeys));
+
+	loadModels();
 
 	glutMainLoop();
 }

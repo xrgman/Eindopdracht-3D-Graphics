@@ -1,0 +1,22 @@
+﻿Build started 5/31/2016 1:15:03 PM.
+     1>Project "C:\Users\Wesley\Documents\GitHub\Eindopdracht-3D-Graphics\Eindopdracht\Eindopdracht\Eindopdracht.vcxproj" on node 2 (Build target(s)).
+     1>ClCompile:
+         C:\Program Files (x86)\Microsoft Visual Studio 14.0\VC\bin\CL.exe /c /Zi /nologo /W3 /WX- /O2 /Oi /Oy- /GL /D WIN32 /D NDEBUG /D _CONSOLE /D _UNICODE /D UNICODE /Gm- /EHsc /MD /GS /Gy /fp:precise /Zc:wchar_t /Zc:forScope /Zc:inline /Fo"Release\\" /Fd"Release\vc140.pdb" /Gd /TP /analyze- /errorReport:prompt Camera.cpp Cube.cpp GameStateManager.cpp Main.cpp Model.cpp PlayState.cpp Vec2f.cpp Vec3f.cpp
+         Camera.cpp
+         Cube.cpp
+     1>Cube.cpp(2): fatal error C1083: Cannot open include file: 'GL\freeglut.h': No such file or directory
+         GameStateManager.cpp
+     1>GameStateManager.cpp(23): warning C4018: '<': signed/unsigned mismatch
+         Main.cpp
+     1>Main.cpp(2): fatal error C1083: Cannot open include file: 'GL\freeglut.h': No such file or directory
+         Model.cpp
+     1>c:\users\wesley\documents\github\eindopdracht-3d-graphics\eindopdracht\eindopdracht\Model.h(8): fatal error C1083: Cannot open include file: 'GL\freeglut.h': No such file or directory
+         PlayState.cpp
+     1>PlayState.cpp(2): fatal error C1083: Cannot open include file: 'GL\freeglut.h': No such file or directory
+         Vec2f.cpp
+         Vec3f.cpp
+     1>Done Building Project "C:\Users\Wesley\Documents\GitHub\Eindopdracht-3D-Graphics\Eindopdracht\Eindopdracht\Eindopdracht.vcxproj" (Build target(s)) -- FAILED.
+
+Build FAILED.
+
+Time Elapsed 00:00:01.41

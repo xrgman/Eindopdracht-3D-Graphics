@@ -44,7 +44,7 @@ Model::Texture::Texture(const std::string & fileName)
 	char* imgData = (char*)stbi_load(fileName.c_str(), &width, &height, &bpp, 4);
 
 	if (!imgData)
-		std::cout << stbi_failure_reason() << std::endl;
+		std::cout << stbi_failure_reason() << "nooo" << std::endl;
 	glGenTextures(1, &textureID);
 	glBindTexture(GL_TEXTURE_2D, textureID);
 	glTexImage2D(GL_TEXTURE_2D, 0, GL_RGBA, width, height, 0, GL_RGBA, GL_UNSIGNED_BYTE, imgData);
@@ -75,8 +75,59 @@ Model::Vec::Vec(float x, float y, float z, float nx, float ny, float nz, float t
 	this->texcoordy = ty;
 }
 
+Model::Vec::~Vec()
+{
+}
+
 void Model::loadMaterialFile(std::string fileName, std::string dirName)
 {
+	std::ifstream pFile(fileName.c_str());
+	if (!pFile.is_open()) {
+		std::cout << "Could not open file " << fileName << std::endl;
+		return;
+	}
+
+	MaterialInfo *currentMaterial = NULL;
+
+	while (!pFile.eof()) {
+		std::string line;
+		std::getline(pFile, line);
+
+		line = replace(line, "\t", " ");
+		while (line.find("  ") != std::string::npos)
+			line = replace(line, "  ", " ");
+		if (line == "")
+			continue;
+		if (line[0] == ' ')
+			line = line.substr(1);
+		if (line == "")
+			continue;
+		if (line[line.length() - 1] == ' ')
+			line = line.substr(0, line.length() - 1);
+		if (line == "")
+			continue;
+		if (line[0] == '#')
+			continue;
+
+		std::vector<std::string> params = split(line, " ");
+		params[0] = toLower(params[0]);
+		if (params[0] == "newmtl") {
+			if (currentMaterial != NULL) {
+				materials.push_back(currentMaterial);
+			}
+			currentMaterial = new MaterialInfo();
+			currentMaterial->name = params[1];
+		}
+		else if (params[0] == "map_kd") {
+			currentMaterial->hasTexture = true;
+			currentMaterial->texture = new Texture(dirName + "/" + params[1]);
+			std::cout << "Made material named " << params[1] << std::endl;
+		}
+		else
+			std::cout << "Didn't parse " << params[0] << " in material file" << std::endl;
+	}
+	if (currentMaterial != NULL)
+		materials.push_back(currentMaterial);
 }
 
 Model::Model(std::string fileName)
@@ -179,18 +230,23 @@ Model::Model(std::string fileName)
 	groups.push_back(currentGroup);
 
 	//Turning to vec:
-	for each(ObjGroup *group in groups) {
+	for (ObjGroup *group : groups) {
 		for (Face &face : group->faces) {
-			for each(auto &vertex in face.vertices) {
+			for (auto &vertex : face.vertices) {
 				group->vecs.push_back(Vec(vertices[vertex.position]->x, vertices[vertex.position]->y, vertices[vertex.position]->z, normals[vertex.normal]->x, normals[vertex.normal]->y, normals[vertex.normal]->z, texcoords[vertex.texcoord]->x, texcoords[vertex.texcoord]->y));
 			}
 		}
 	}
 }
 
+Model::~Model(void)
+{
+}
+
 
 void Model::draw()
 {
+	glPushMatrix();
 	for (auto group : groups) {
 		ObjGroup gr = *group;
 
