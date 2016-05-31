@@ -16,6 +16,21 @@
     <Filter Include="Header Files\GameStates">
       <UniqueIdentifier>{8c89ca69-0a46-4531-9e9b-16f419a364c4}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Header Files\Figures">
+      <UniqueIdentifier>{9156db8e-1604-434f-ba93-1c4af2e63d70}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Figures">
+      <UniqueIdentifier>{102a7ca9-58d5-40da-a352-6c14914a5f20}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Gamestates">
+      <UniqueIdentifier>{b5735a3a-0c2b-4424-8c13-60f999ce6d5b}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\Models">
+      <UniqueIdentifier>{56c25497-71c9-4250-8443-ad394d29b188}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Models">
+      <UniqueIdentifier>{74db4563-d3b9-4e07-8367-6b57629341b1}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Main.cpp">
@@ -24,11 +39,23 @@
     <ClCompile Include="GameStateManager.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="PlayState.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
     <ClCompile Include="Camera.cpp">
       <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Cube.cpp">
+      <Filter>Source Files\Figures</Filter>
+    </ClCompile>
+    <ClCompile Include="PlayState.cpp">
+      <Filter>Source Files\Gamestates</Filter>
+    </ClCompile>
+    <ClCompile Include="Model.cpp">
+      <Filter>Source Files\Models</Filter>
+    </ClCompile>
+    <ClCompile Include="Vec3f.cpp">
+      <Filter>Source Files\Models</Filter>
+    </ClCompile>
+    <ClCompile Include="Vec2f.cpp">
+      <Filter>Source Files\Models</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -46,6 +73,21 @@
     </ClInclude>
     <ClInclude Include="GameState.h">
       <Filter>Header Files\GameStates</Filter>
+    </ClInclude>
+    <ClInclude Include="Figure.h">
+      <Filter>Header Files\Figures</Filter>
+    </ClInclude>
+    <ClInclude Include="Cube.h">
+      <Filter>Header Files\Figures</Filter>
+    </ClInclude>
+    <ClInclude Include="Model.h">
+      <Filter>Header Files\Models</Filter>
+    </ClInclude>
+    <ClInclude Include="Vec3f.h">
+      <Filter>Header Files\Models</Filter>
+    </ClInclude>
+    <ClInclude Include="Vec2f.h">
+      <Filter>Header Files\Models</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

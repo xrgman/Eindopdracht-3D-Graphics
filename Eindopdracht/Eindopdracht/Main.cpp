@@ -5,37 +5,32 @@
 
 GameStateManager gameManager;
 Camera camera;
+int width, height;
 bool keys[255];
 bool specialKeys[255];
-
 
 void onDisplay() {
 	glClearColor(0.6f, 0.6f, 1, 1);
 	glClear(GL_DEPTH_BUFFER_BIT | GL_COLOR_BUFFER_BIT);
 
+	//Setting Perspective:
 	glMatrixMode(GL_PROJECTION);
 	glLoadIdentity();
-	gluPerspective(90.0f, (float)camera.width / camera.height, 0.1, 50);
+	gluPerspective(60.0f, (float)width / height, 0.1, 30);
 
+	//Setting camera:
 	glMatrixMode(GL_MODELVIEW);
-
 	glLoadIdentity();
-	glTranslatef(camera.posX, -camera.posZ, camera.posY);
 	glRotatef(camera.rotX, 1, 0, 0);
 	glRotatef(camera.rotY, 0, 1, 0);
+	glTranslatef(camera.posX, camera.posZ, camera.posY);
 
-	glPushMatrix();
-	glBegin(GL_QUADS);
-	glVertex3f(-15, -1, -15);
-	glVertex3f(15, -1, -15);
-	glVertex3f(15, -1, 15);
-	glVertex3f(-15, -1, 15);
-	glEnd();
-	glPopMatrix();
-	
-	glColor3f(1.0f, 1.0f, 1.0f);
+	//Setting light:
+	float pos[4] = { 0.5, 1, -1, 0 };
+	glLightfv(GL_LIGHT0, GL_POSITION, pos);
+
+	//Draw the game state:
 	gameManager.Draw();
-
 	glutSwapBuffers();
 }
 
@@ -67,19 +62,14 @@ void onKeyboardSpecialUp(int key, int x, int y) {
 }
 
 void onMousePassiveMotion(int x, int y) {
-	int dx = x - camera.width / 2;
-	int dy = y - camera.height / 2;
+	int dx = x - width / 2;
+	int dy = y - height / 2;
+	int camDY = y - camera.height / 2;
 	if ((dx != 0 || dy != 0) && abs(dx) < 400 && abs(dy) < 400)
 	{
-		camera.rotX += dy / 10.0f;
-		if (camera.rotX > 30) {
-			camera.rotX = 30;
-		}
-		else if (camera.rotX < -30) {
-			camera.rotX = -30;
-		}
 		camera.rotY += dx / 10.0f;
-		glutWarpPointer(camera.width / 2, camera.height / 2);
+		camera.rotX += dy / 10.0f;
+		glutWarpPointer(width / 2, height / 2);
 	}
 }
 
@@ -88,24 +78,29 @@ void onTimer(int id) {
 	glutTimerFunc(1000 / 60, onTimer, 1);
 }
 
-
 int main(int argc, char* argv[]) {
 	gameManager = GameStateManager();
 	gameManager.Init(&camera);
 
+	width = 1920;
+	height = 1080;
+
 	glutInitDisplayMode(GLUT_RGB | GLUT_DOUBLE | GLUT_DEPTH);
 	glutInit(&argc, argv);
-	glutInitWindowSize(1920, 1080); //Apperently my laptop needs this...
+	glutInitWindowSize(width, height); //Apperently my laptop needs this...
 	glutCreateWindow("Eindopdracht");
-
+	
 	glEnable(GL_DEPTH_TEST);
-	//glutFullScreen();
+	glEnable(GL_LIGHTING);
+	glEnable(GL_LIGHT0);
+
+	glutFullScreen();
 	glutSetCursor(GLUT_CURSOR_NONE);
 
 	//Set functions:
 	glutIdleFunc(onIdle);
 	glutDisplayFunc(onDisplay);
-	glutReshapeFunc([](int w, int h) { camera.width = w; camera.height = h; glViewport(0, 0, w, h); });
+	glutReshapeFunc([](int w, int h) { width = w; height = h; glViewport(0, 0, w, h); });
 	glutKeyboardFunc(onKeyboard);
 	glutTimerFunc(1000 / 60, onTimer, 1);
 	glutKeyboardUpFunc(onKeyboardUp);
@@ -113,7 +108,7 @@ int main(int argc, char* argv[]) {
 	glutSpecialUpFunc(onKeyboardSpecialUp);
 	glutPassiveMotionFunc(onMousePassiveMotion);
 
-	glutWarpPointer(camera.width / 2, camera.height / 2); //Center mouse
+	glutWarpPointer(width / 2, height / 2); //Center mouse
 
 	memset(keys, 0, sizeof(keys));
 	memset(specialKeys, 0, sizeof(specialKeys));
