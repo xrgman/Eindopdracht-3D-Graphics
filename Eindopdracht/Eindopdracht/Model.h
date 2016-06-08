@@ -8,6 +8,7 @@
 #include "GL\freeglut.h"
 #include "Vec2f.h"
 #include "Vec3f.h"
+#include "Texture.h"
 
 using namespace std;
 
@@ -23,15 +24,6 @@ class Model {
 		class Face {
 			public:
 				list<Vertex> vertices;
-		};
-
-		class Texture {
-			private:
-				GLuint textureID;
-				int width, height;
-			public:
-				Texture(const std::string &fileName);
-				void bind();
 		};
 
 		class MaterialInfo {

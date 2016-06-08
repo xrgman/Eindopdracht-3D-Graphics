@@ -4,6 +4,7 @@
 #include "Camera.h"
 #include <vector>
 #include "Model.h"
+#include "ModelLoader.h"
 
 GameStateManager gameManager;
 Camera camera;
@@ -11,7 +12,6 @@ int width, height;
 bool keys[255];
 bool specialKeys[255];
 
-std::vector<pair<int, Model*> > models;
 
 void onDisplay() {
 	glClearColor(0.6f, 0.6f, 1, 1);
@@ -34,10 +34,6 @@ void onDisplay() {
 	glLightfv(GL_LIGHT0, GL_POSITION, pos);
 
 	//Draw the game state:
-	glPushMatrix();
-	glTranslatef(2, 0, 0);
-	models[0].second->draw();
-	glPopMatrix();
 	gameManager.Draw();
 	
 	glFlush();
@@ -90,10 +86,6 @@ void onTimer(int id) {
 	glutTimerFunc(1000 / 60, onTimer, 1);
 }
 
-void loadModels() {
-	models.push_back(pair<int, Model*>(1, new Model("models/bloemetje/PrimRoseP.obj")));
-}
-
 int main(int argc, char* argv[]) {
 	gameManager = GameStateManager();
 	gameManager.Init(&camera);
@@ -129,7 +121,8 @@ int main(int argc, char* argv[]) {
 	memset(keys, 0, sizeof(keys));
 	memset(specialKeys, 0, sizeof(specialKeys));
 
-	loadModels();
+	gameManager.getModelLoader()->loadModels();
+	gameManager.getTextureLoader()->loadTextures();
 
 	glutMainLoop();
 }

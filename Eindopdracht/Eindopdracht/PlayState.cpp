@@ -6,9 +6,6 @@
 float lastFrameTime = 0;
 Cube cube = Cube();
 
-
-//Model* bloem = new Model("models/bloemetje/PrimRoseP.obj");
-
 void PlayState::Init(GameStateManager * game, Camera * camera)
 {
 	this->gameManager = game;
@@ -37,12 +34,16 @@ void PlayState::Update()
 void PlayState::Draw()
 {
 	glColor3f(0.1f, 1.0f, 0.2f);
+	glColor3f(255, 255, 255);
+	glEnable(GL_TEXTURE_2D);
+	gameManager->getTextureLoader()->bindHighway();
 	glBegin(GL_QUADS);
-		glVertex3f(-15, -1, -15);
-		glVertex3f(15, -1, -15);
-		glVertex3f(15, -1, 15);
-		glVertex3f(-15, -1, 15);
+		glTexCoord2f(0, 0); glVertex3f(-15, -1, -15);
+		glTexCoord2f(0, 1); glVertex3f(15, -1, -15);
+		glTexCoord2f(1, 1); glVertex3f(15, -1, 15);
+		glTexCoord2f(1, 0); glVertex3f(-15, -1, 15);
 	glEnd();
+	glDisable(GL_TEXTURE_2D);
 
 	for (int x = -10; x <= 10; x += 5)
 	{
@@ -50,6 +51,11 @@ void PlayState::Draw()
 		{
 			glPushMatrix();
 			glTranslatef((float)x, 0.0f, (float)y);
+			glColor3f(255, 255, 255);
+			glPushMatrix();
+			glTranslatef(0, 1, 0);
+			gameManager->getModelLoader()->getPlant()->draw();
+			glPopMatrix();
 			cube.Draw();
 			glPopMatrix();
 		}

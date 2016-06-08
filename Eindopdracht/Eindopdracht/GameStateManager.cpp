@@ -7,9 +7,13 @@ void GameStateManager::Init(Camera * camera)
 {
 	this->camera = camera;
 	Cleanup();
+	//Adding moddelloader;
+	moddelLoader = new ModdelLoader();
+	//Adding textureLoader:
+	textureLoader = new TextureLoader();
+	//Adding states:
 	states.push_back(new PlayState());
 	states.at(currentState)->Init(this,camera);
-	//Add list of states here
 }
 
 void GameStateManager::Cleanup()
@@ -56,5 +60,15 @@ void GameStateManager::Idle()
 {
 	if (!states.empty())
 		states.at(currentState)->Idle();
+}
+
+ModdelLoader * GameStateManager::getModelLoader()
+{
+	return moddelLoader;
+}
+
+TextureLoader * GameStateManager::getTextureLoader()
+{
+	return textureLoader;
 }
 
