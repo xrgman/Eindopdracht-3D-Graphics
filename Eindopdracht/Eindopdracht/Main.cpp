@@ -30,12 +30,15 @@ void onDisplay() {
 	glTranslatef(camera.posX, camera.posZ, camera.posY);
 
 	//Setting light:
-	/*float pos[4] = { 0.5, 1, -1, 0 };
-	glLightfv(GL_LIGHT0, GL_POSITION, pos);*/
+	float pos[4] = { 0.5, 1, -1, 0 };
+	glLightfv(GL_LIGHT0, GL_POSITION, pos);
 
 	//Draw the game state:
+	glPushMatrix();
+	glTranslatef(2, 0, 0);
 	models[0].second->draw();
-	//gameManager.Draw();
+	glPopMatrix();
+	gameManager.Draw();
 	
 	glFlush();
 	
@@ -104,8 +107,8 @@ int main(int argc, char* argv[]) {
 	glutCreateWindow("Eindopdracht");
 	
 	glEnable(GL_DEPTH_TEST);
-	/*glEnable(GL_LIGHTING);
-	glEnable(GL_LIGHT0);*/
+	glEnable(GL_LIGHTING);
+	glEnable(GL_LIGHT0);
 
 	glutFullScreen();
 	glutSetCursor(GLUT_CURSOR_NONE);

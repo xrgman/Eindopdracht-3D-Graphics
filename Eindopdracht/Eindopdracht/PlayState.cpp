@@ -44,8 +44,6 @@ void PlayState::Draw()
 		glVertex3f(-15, -1, 15);
 	glEnd();
 
-	
-
 	for (int x = -10; x <= 10; x += 5)
 	{
 		for (int y = -10; y <= 10; y += 5)
@@ -56,6 +54,7 @@ void PlayState::Draw()
 			glPopMatrix();
 		}
 	}
+	glColor3f(255, 255, 255);
 }
 
 void PlayState::Idle()
