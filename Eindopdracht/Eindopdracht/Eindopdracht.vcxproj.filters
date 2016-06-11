@@ -66,6 +66,12 @@
     <ClCompile Include="TextureLoader.cpp">
       <Filter>Source Files\Models</Filter>
     </ClCompile>
+    <ClCompile Include="CubeWithTexture.cpp">
+      <Filter>Source Files\Figures</Filter>
+    </ClCompile>
+    <ClCompile Include="SquareWithTexture.cpp">
+      <Filter>Source Files\Figures</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="GameStateManager.h">
@@ -106,6 +112,12 @@
     </ClInclude>
     <ClInclude Include="Texture.h">
       <Filter>Header Files\Models</Filter>
+    </ClInclude>
+    <ClInclude Include="CubeWithTexture.h">
+      <Filter>Header Files\Figures</Filter>
+    </ClInclude>
+    <ClInclude Include="SquareWithTexture.h">
+      <Filter>Header Files\Figures</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

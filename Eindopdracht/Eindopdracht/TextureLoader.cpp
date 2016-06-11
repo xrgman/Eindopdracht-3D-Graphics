@@ -3,7 +3,9 @@
 void TextureLoader::loadTextures()
 {
 	textures.push_back(new Texture("textures/grass.jpg"));
-	textures.push_back(new Texture("textures/highway.png"));
+	textures.push_back(new Texture("textures/highway2.jpg"));
+	textures.push_back(new Texture("textures/ground1.jpg"));
+	textures.push_back(new Texture("textures/ground2.jpg"));
 }
 
 void TextureLoader::bindGrass()
@@ -14,4 +16,14 @@ void TextureLoader::bindGrass()
 void TextureLoader::bindHighway()
 {
 	textures.at(1)->bind();
+}
+
+void TextureLoader::bindGround1()
+{
+	textures.at(2)->bind();
+}
+
+void TextureLoader::bindGround2()
+{
+	textures.at(3)->bind();
 }
