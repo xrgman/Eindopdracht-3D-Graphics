@@ -56,9 +56,9 @@ class Model {
 				vector<Vec> vecs; 
 		};
 
-		std::vector<Vec3f *> vertices;
-		std::vector<Vec3f *> normals;
-		std::vector<Vec2f *> texcoords;
+		std::vector<Vec3f > vertices;
+		std::vector<Vec3f > normals;
+		std::vector<Vec2f > texcoords;
 		std::vector<ObjGroup *> groups;
 		std::vector<MaterialInfo *> materials;
 
@@ -69,5 +69,10 @@ class Model {
 		Model(std::string filename);
 		~Model(void);
 		void draw();
+
+		Vec3f minVertex;
+		Vec3f maxVertex;
+		Vec3f center;
+		float radius;
 };
 #endif

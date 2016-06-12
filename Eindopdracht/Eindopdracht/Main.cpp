@@ -69,7 +69,7 @@ void onKeyboardSpecialUp(int key, int x, int y) {
 }
 
 void onMousePassiveMotion(int x, int y) {
-	int dx = x - width / 2;
+	/*int dx = x - width / 2;
 	int dy = y - height / 2;
 	int camDY = y - camera.height / 2;
 	if ((dx != 0 || dy != 0) && abs(dx) < 400 && abs(dy) < 400)
@@ -77,7 +77,7 @@ void onMousePassiveMotion(int x, int y) {
 		camera.rotY += dx / 10.0f;
 		camera.rotX += dy / 10.0f;
 		glutWarpPointer(width / 2, height / 2);
-	}
+	}*/
 }
 
 void onTimer(int id) {
@@ -123,6 +123,7 @@ int main(int argc, char* argv[]) {
 
 	gameManager.getModelLoader()->loadModels();
 	gameManager.getTextureLoader()->loadTextures();
+	gameManager.Start();
 
 	glutMainLoop();
 }

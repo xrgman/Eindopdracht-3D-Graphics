@@ -11,6 +11,7 @@ class GameState;
 class GameStateManager {
 	public:
 		void Init(Camera * camera);
+		void Start();
 		void Cleanup();
 
 		void nextState();

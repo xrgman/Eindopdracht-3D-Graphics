@@ -13,7 +13,11 @@ void GameStateManager::Init(Camera * camera)
 	textureLoader = new TextureLoader();
 	//Adding states:
 	states.push_back(new PlayState());
-	states.at(currentState)->Init(this,camera);
+}
+
+void GameStateManager::Start()
+{
+	states.at(currentState)->Init(this, camera);
 }
 
 void GameStateManager::Cleanup()

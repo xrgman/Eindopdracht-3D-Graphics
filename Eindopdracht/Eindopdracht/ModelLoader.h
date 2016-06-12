@@ -8,6 +8,8 @@ class ModdelLoader {
 	public:
 		void loadModels();
 		Model* getPlant();
+		Model* getCar();
+		Model* getLight();
 	private:
 		std::vector<Model*> models;
 };

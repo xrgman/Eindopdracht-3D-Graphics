@@ -72,6 +72,9 @@
     <ClCompile Include="SquareWithTexture.cpp">
       <Filter>Source Files\Figures</Filter>
     </ClCompile>
+    <ClCompile Include="Entity.cpp">
+      <Filter>Source Files\Figures</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="GameStateManager.h">
@@ -117,6 +120,9 @@
       <Filter>Header Files\Figures</Filter>
     </ClInclude>
     <ClInclude Include="SquareWithTexture.h">
+      <Filter>Header Files\Figures</Filter>
+    </ClInclude>
+    <ClInclude Include="Entity.h">
       <Filter>Header Files\Figures</Filter>
     </ClInclude>
   </ItemGroup>

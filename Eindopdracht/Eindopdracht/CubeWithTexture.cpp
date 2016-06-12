@@ -4,6 +4,7 @@
 CubeWithTexture::CubeWithTexture()
 {
 	Intialize();
+	scale = 1;
 }
 
 CubeWithTexture::~CubeWithTexture()
@@ -47,10 +48,16 @@ void CubeWithTexture::Intialize()
 
 void CubeWithTexture::Draw()
 {
+	glPushMatrix();
 	glEnableClientState(GL_TEXTURE_COORD_ARRAY);
 	glEnableClientState(GL_VERTEX_ARRAY);
 	glEnableClientState(GL_NORMAL_ARRAY);
-
+	
+	glTranslatef(position.x, position.y, position.z);
+	glRotatef(rotation.x, 1, 0, 0);
+	glRotatef(rotation.y, 0, 1, 0);
+	glRotatef(rotation.z, 0, 0, 1);
+	glScalef(scale, scale, scale);
 	glVertexPointer(3, GL_FLOAT, sizeof(Vertex), ((float*)vertices.data()) + 0);
 	glNormalPointer(GL_FLOAT, sizeof(Vertex), ((float*)vertices.data()) + 3);
 	glTexCoordPointer(2, GL_FLOAT, sizeof(Vertex), ((float*)vertices.data()) + 6);
@@ -59,4 +66,5 @@ void CubeWithTexture::Draw()
 	glDisableClientState(GL_TEXTURE_COORD_ARRAY);
 	glDisableClientState(GL_VERTEX_ARRAY);
 	glDisableClientState(GL_NORMAL_ARRAY);
+	glPopMatrix();
 }

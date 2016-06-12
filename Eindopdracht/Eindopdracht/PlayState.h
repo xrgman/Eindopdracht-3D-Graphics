@@ -18,6 +18,8 @@ class PlayState : public GameState {
 	private:
 		GameStateManager * gameManager;
 		Camera * camera;
+		void loadModels();
+		void moveCar(float angle, float frac);
 protected:
 	
 };

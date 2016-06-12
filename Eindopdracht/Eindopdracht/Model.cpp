@@ -153,13 +153,13 @@ Model::Model(std::string fileName)
 		params[0] = toLower(params[0]);
 
 		if (params[0] == "v")
-			vertices.push_back(new Vec3f((float)atof(params[1].c_str()), (float)atof(params[2].c_str()),
+			vertices.push_back(Vec3f((float)atof(params[1].c_str()), (float)atof(params[2].c_str()),
 				(float)atof(params[3].c_str())));
 		else if (params[0] == "vn")
-			normals.push_back(new Vec3f((float)atof(params[1].c_str()), (float)atof(params[2].c_str()),
+			normals.push_back(Vec3f((float)atof(params[1].c_str()), (float)atof(params[2].c_str()),
 				(float)atof(params[3].c_str())));
 		else if (params[0] == "vt")
-			texcoords.push_back(new Vec2f((float)atof(params[1].c_str()), (float)atof(params[2].c_str())));
+			texcoords.push_back(Vec2f((float)atof(params[1].c_str()), (float)atof(params[2].c_str())));
 		else if (params[0] == "f") {
 			for (size_t ii = 4; ii <= params.size(); ii++) {
 				Face face;
@@ -207,11 +207,27 @@ Model::Model(std::string fileName)
 	}
 	groups.push_back(currentGroup);
 
+	//calculating min max center radius:
+	minVertex = vertices[0];
+	maxVertex = vertices[0];
+	for (auto v : vertices)
+	{
+		for (int i = 0; i < 3; i++)
+		{
+			minVertex[i] = fmin(minVertex[i], v[i]);
+			maxVertex[i] = fmax(maxVertex[i], v[i]);
+		}
+	}
+	center = (minVertex + maxVertex) / 2.0f;
+	for (auto v : vertices)
+		radius = fmax(radius, (center.x - v.x) * (center.x - v.x) + (center.z - v.z) * (center.z - v.z));
+	radius = sqrt(radius);
+
 	//Turning to vec:
 	for (ObjGroup *group : groups) {
 		for (Face &face : group->faces) {
 			for (auto &vertex : face.vertices) {
-				group->vecs.push_back(Vec(vertices[vertex.position]->x, vertices[vertex.position]->y, vertices[vertex.position]->z, normals[vertex.normal]->x, normals[vertex.normal]->y, normals[vertex.normal]->z, texcoords[vertex.texcoord]->x, texcoords[vertex.texcoord]->y));
+				group->vecs.push_back(Vec(vertices[vertex.position].x, vertices[vertex.position].y, vertices[vertex.position].z, normals[vertex.normal].x, normals[vertex.normal].y, normals[vertex.normal].z, texcoords[vertex.texcoord].x, texcoords[vertex.texcoord].y));
 			}
 		}
 	}
