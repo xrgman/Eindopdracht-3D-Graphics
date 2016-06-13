@@ -20,6 +20,8 @@ class PlayState : public GameState {
 		Camera * camera;
 		void loadModels();
 		void moveCar(float angle, float frac);
+		void backgroundMusicThread();
+		void playSound(std::string filePath);
 protected:
 	
 };

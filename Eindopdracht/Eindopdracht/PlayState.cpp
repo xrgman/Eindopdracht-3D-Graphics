@@ -1,6 +1,7 @@
 #define _USE_MATH_DEFINES
 #include <math.h>
 #include <vector>
+#include <thread>
 #include "PlayState.h"
 #include "GL\freeglut.h"
 #include "Cube.h"
@@ -8,6 +9,7 @@
 #include "SquareWithTexture.h"
 #include "Model.h"
 #include "Entity.h"
+#include "SFML/Audio.hpp"
 
 float lastFrameTime = 0;
 Cube cube = Cube();
@@ -20,12 +22,14 @@ void PlayState::Init(GameStateManager * game, Camera * camera)
 {
 	this->gameManager = game;
 	this->camera = camera;
-	camera->posX = -5.504399;
+	camera->posX = -5.104399;
 	camera->posY = 0.142510;
 	camera->posZ -= 2;
 	camera->rotX = 18.30030;
 	camera->rotY = -89.399963;
 	loadModels();
+	std::thread backgroundMusic(&PlayState::backgroundMusicThread, this);
+	backgroundMusic.detach();
 }
 
 void PlayState::loadModels()
@@ -132,10 +136,10 @@ void PlayState::Idle()
 	float deltaTime = frameTime - lastFrameTime;
 	lastFrameTime = frameTime;
 	const float speed = 5;
-	if (specialKeys[GLUT_KEY_UP] || keys['w'])
-		camera->move(90, deltaTime*speed);
-	if (specialKeys[GLUT_KEY_DOWN] || keys['s']) 
-		camera->move(270, deltaTime*speed);
+	if (specialKeys[GLUT_KEY_UP] || keys['w']);
+		//camera->move(90, deltaTime*speed);
+	if (specialKeys[GLUT_KEY_DOWN] || keys['s']);
+		//camera->move(270, deltaTime*speed);
 	if (specialKeys[GLUT_KEY_LEFT] || keys['a'])
 		//camera->move(0, deltaTime*speed);
 		moveCar(270, deltaTime*speed);
@@ -154,4 +158,20 @@ void PlayState::moveCar(float angle, float frac)
 {
 	if((angle == 270 && entitys.at(0)->position.z < 3.8 ) || (angle == 180 && entitys.at(0)->position.z > -3.8))
 		entitys.at(0)->position.z += (float)cos((45 + angle) / 180 * M_PI) * frac;
+}
+
+void PlayState::backgroundMusicThread()
+{
+	sf::SoundBuffer soundbuf;
+	sf::Sound sound;
+	soundbuf.loadFromFile("music/background.wav");
+	sound.setBuffer(soundbuf);
+	sound.setLoop(true);
+	sound.play();
+	while (sound.getStatus() != sf::Sound::Status::Stopped);
+}
+
+void PlayState::playSound(std::string filePath)
+{
+
 }
