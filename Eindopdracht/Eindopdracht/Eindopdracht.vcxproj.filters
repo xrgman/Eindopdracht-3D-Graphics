@@ -75,6 +75,9 @@
     <ClCompile Include="Entity.cpp">
       <Filter>Source Files\Figures</Filter>
     </ClCompile>
+    <ClCompile Include="Sound.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="GameStateManager.h">
@@ -124,6 +127,9 @@
     </ClInclude>
     <ClInclude Include="Entity.h">
       <Filter>Header Files\Figures</Filter>
+    </ClInclude>
+    <ClInclude Include="Sound.h">
+      <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

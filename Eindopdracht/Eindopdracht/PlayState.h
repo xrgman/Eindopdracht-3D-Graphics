@@ -18,10 +18,9 @@ class PlayState : public GameState {
 	private:
 		GameStateManager * gameManager;
 		Camera * camera;
+		float lastFrameTime;
 		void loadModels();
 		void moveCar(float angle, float frac);
-		void backgroundMusicThread();
-		void playSound(std::string filePath);
 protected:
 	
 };

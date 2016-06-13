@@ -4,7 +4,7 @@ void ModdelLoader::loadModels()
 {
 	models.push_back(new Model("models/bloemetje/PrimRoseP.obj")); //test plant;
 	models.push_back(new Model("models/porsche/police_car.obj")); //The car;
-	models.push_back(new Model("models/car/honda_jazz.obj")); //The streetLight;
+	models.push_back(new Model("models/taxi/taxi.obj")); //The streetLight;
 }
 
 Model * ModdelLoader::getPlant()
@@ -18,6 +18,11 @@ Model * ModdelLoader::getCar()
 }
 
 Model * ModdelLoader::getLight()
+{
+	return models.at(3);
+}
+
+Model * ModdelLoader::getTaxi()
 {
 	return models.at(2);
 }

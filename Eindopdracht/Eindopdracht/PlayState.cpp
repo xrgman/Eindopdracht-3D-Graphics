@@ -1,7 +1,6 @@
 #define _USE_MATH_DEFINES
 #include <math.h>
 #include <vector>
-#include <thread>
 #include "PlayState.h"
 #include "GL\freeglut.h"
 #include "Cube.h"
@@ -9,12 +8,11 @@
 #include "SquareWithTexture.h"
 #include "Model.h"
 #include "Entity.h"
-#include "SFML/Audio.hpp"
+#include "Sound.h"
 
-float lastFrameTime = 0;
-Cube cube = Cube();
-CubeWithTexture cube2 = CubeWithTexture();
 SquareWithTexture square;
+Cube cube = Cube();
+Sound sound = Sound();
 std::vector<Entity *> entitys;
 float scrollWay = 0;
 
@@ -28,8 +26,7 @@ void PlayState::Init(GameStateManager * game, Camera * camera)
 	camera->rotX = 18.30030;
 	camera->rotY = -89.399963;
 	loadModels();
-	std::thread backgroundMusic(&PlayState::backgroundMusicThread, this);
-	backgroundMusic.detach();
+	sound.playMusic("music/background.wav");
 }
 
 void PlayState::loadModels()
@@ -40,7 +37,17 @@ void PlayState::loadModels()
 	car->rotation.y = -90;
 	car->scale = 0.5;
 	entitys.push_back(car);
-	cube2.position.x = -40;
+	Entity* enemyCar = new Entity(gameManager->getModelLoader()->getTaxi());
+	enemyCar->rotation.y = 90;
+	enemyCar->position.y = -1;
+	enemyCar->position.x = -40;
+	entitys.push_back(enemyCar);
+	Entity* enemyCar2 = new Entity(gameManager->getModelLoader()->getTaxi());
+	enemyCar2->rotation.y = 90;
+	enemyCar2->position.y = -1;
+	enemyCar2->position.x = -40;
+	enemyCar2->position.z = -3.6;
+	entitys.push_back(enemyCar2);
 }
 
 void PlayState::Cleanup()
@@ -57,10 +64,32 @@ void PlayState::HandleEvents(bool keys[], bool specialKeys[])
 
 void PlayState::Update()
 {
+	//Updating scrolling map:
 	scrollWay+=0.2;
-	cube2.position.x = -40 + fmod(scrollWay, 90);
-	if (entitys.at(0)->hasCollision(cube2.position))
-		entitys.at(0)->dead = true;
+	//Checking collision: 
+	for (int x = 1; x < entitys.size(); x++) {
+		entitys.at(x)->position.x = -29 + fmod(scrollWay,35)*1.5;
+		if (entitys.at(0)->hasCollision(entitys.at(x)->position) && !entitys.at(0)->dead) {
+			sound.playSound("music/crash.wav");
+			entitys.at(0)->dead = true;
+		}
+		//Respawning enemys:
+		if (entitys.at(x)->position.x > 10) {
+			int side = rand() % 2;
+			switch (side) {
+				case 0:
+					entitys.at(x)->position.z = 3.6;
+					break;
+				case 1:
+					entitys.at(x)->position.z =	0;
+					break;
+				case 2:
+					entitys.at(x)->position.z = -3.6;
+					break;
+			}
+		}
+	}
+	//Dead animation:
 	if (entitys.at(0)->dead)
 		entitys.at(0)->position.x += 0.2;
 }
@@ -103,19 +132,6 @@ void PlayState::Draw()
 	}
 	glDisable(GL_TEXTURE_2D);
 
-	
-	//glPushMatrix();
-	////glTranslatef(40 + fmod(scrollWay, 90), 0.0f, (float)2);
-	//glTranslatef(-40 + fmod(scrollWay, 90), 0.0f, 0);
-	//
-	//
-	//glPopMatrix();
-	
-
-	glEnable(GL_TEXTURE_2D);
-		gameManager->getTextureLoader()->bindGround2();
-		cube2.Draw();
-	glDisable(GL_TEXTURE_2D);
 
 	for (Entity* entity : entitys)
 		entity->draw();
@@ -160,18 +176,3 @@ void PlayState::moveCar(float angle, float frac)
 		entitys.at(0)->position.z += (float)cos((45 + angle) / 180 * M_PI) * frac;
 }
 
-void PlayState::backgroundMusicThread()
-{
-	sf::SoundBuffer soundbuf;
-	sf::Sound sound;
-	soundbuf.loadFromFile("music/background.wav");
-	sound.setBuffer(soundbuf);
-	sound.setLoop(true);
-	sound.play();
-	while (sound.getStatus() != sf::Sound::Status::Stopped);
-}
-
-void PlayState::playSound(std::string filePath)
-{
-
-}
