@@ -1,20 +1,13 @@
-#define _USE_MATH_DEFINES
-#include <math.h>
 #include <vector>
 #include "PlayState.h"
 #include "GL\freeglut.h"
 #include "Cube.h"
 #include "CubeWithTexture.h"
-#include "SquareWithTexture.h"
 #include "Model.h"
 #include "Entity.h"
-#include "Sound.h"
 
-SquareWithTexture square;
 Cube cube = Cube();
-Sound sound = Sound();
 std::vector<Entity *> entitys;
-float scrollWay = 0;
 
 void PlayState::Init(GameStateManager * game, Camera * camera)
 {
@@ -26,16 +19,14 @@ void PlayState::Init(GameStateManager * game, Camera * camera)
 	camera->rotX = 18.30030;
 	camera->rotY = -89.399963;
 	loadModels();
-	sound.playMusic("music/background.wav");
+	sound = new Sound();
+	sound->playMusic("music/background.wav");
 }
 
 void PlayState::loadModels()
 {
 	//Loading car:
-	Entity* car = new Entity(gameManager->getModelLoader()->getCar());
-	car->position.y = -1;
-	car->rotation.y = -90;
-	car->scale = 0.5;
+	car = new Car(gameManager->getModelLoader()->getCar());
 	entitys.push_back(car);
 	Entity* enemyCar = new Entity(gameManager->getModelLoader()->getTaxi());
 	enemyCar->rotation.y = 90;
@@ -70,12 +61,12 @@ void PlayState::Update()
 	for (int x = 1; x < entitys.size(); x++) {
 		entitys.at(x)->position.x = -29 + fmod(scrollWay,35)*1.5;
 		if (entitys.at(0)->hasCollision(entitys.at(x)->position) && !entitys.at(0)->dead) {
-			sound.playSound("music/crash.wav");
+			sound->playSound("music/crash.wav");
 			entitys.at(0)->dead = true;
 		}
 		//Respawning enemys:
 		if (entitys.at(x)->position.x > 10) {
-			int side = rand() % 2;
+			int side = rand() % 3;
 			switch (side) {
 				case 0:
 					entitys.at(x)->position.z = 3.6;
@@ -90,8 +81,13 @@ void PlayState::Update()
 		}
 	}
 	//Dead animation:
-	if (entitys.at(0)->dead)
-		entitys.at(0)->position.x += 0.2;
+	if (car->dead)
+		car->position.x += 0.2;
+
+	//updating entitys:
+	for (Entity* entity : entitys)
+		entity->update(GLUT_ELAPSED_TIME);
+
 }
 
 
@@ -132,9 +128,9 @@ void PlayState::Draw()
 	}
 	glDisable(GL_TEXTURE_2D);
 
-
+	//Drawing models:
 	for (Entity* entity : entitys)
-		entity->draw();
+		entity->Draw();
 
 	//Light fix:
 	glPushMatrix();
@@ -158,21 +154,10 @@ void PlayState::Idle()
 		//camera->move(270, deltaTime*speed);
 	if (specialKeys[GLUT_KEY_LEFT] || keys['a'])
 		//camera->move(0, deltaTime*speed);
-		moveCar(270, deltaTime*speed);
+		car->moveCar(270, deltaTime*speed);
 	if (specialKeys[GLUT_KEY_RIGHT] || keys['d'])
 		//camera->move(180, deltaTime*speed);
-		moveCar(180, deltaTime*speed);
-	if (keys['z']) {
-		printf("x: %f  y: %f  z: %f rotx: %f  roty: %f", camera->posX, camera->posY, camera->posZ, camera->rotX, camera->rotY);
-		Sleep(100);
-	}
+		car->moveCar(180, deltaTime*speed);
+
+	
 }
-
-
-
-void PlayState::moveCar(float angle, float frac)
-{
-	if((angle == 270 && entitys.at(0)->position.z < 3.8 ) || (angle == 180 && entitys.at(0)->position.z > -3.8))
-		entitys.at(0)->position.z += (float)cos((45 + angle) / 180 * M_PI) * frac;
-}
-

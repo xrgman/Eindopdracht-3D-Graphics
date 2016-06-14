@@ -6,22 +6,25 @@ Entity::Entity(Model* model)
 	this->model = model;
 	scale = 1;
 	dead = false;
+	draw = true;
 }
 
 Entity::~Entity()
 {
 }
 
-void Entity::draw()
+void Entity::Draw()
 {
-	glPushMatrix();
+	if (draw) {
+		glPushMatrix();
 		glTranslatef(position.x, position.y, position.z);
 		glRotatef(rotation.x, 1, 0, 0);
 		glRotatef(rotation.y, 0, 1, 0);
 		glRotatef(rotation.z, 0, 0, 1);
 		glScalef(scale, scale, scale);
 		model->draw();
-	glPopMatrix();
+		glPopMatrix();
+	}
 }
 
 bool Entity::hasCollision(const Vec3f & point)

@@ -43,7 +43,6 @@ void onDisplay() {
 
 void onIdle() {
 	gameManager.Idle();
-	
 }
 
 void onKeyboard(unsigned char key, int x, int y) {

@@ -3,6 +3,9 @@
 
 #include "GameState.h"
 #include "Camera.h"
+#include "Car.h"
+#include "Sound.h"
+#include "SquareWithTexture.h"
 
 class PlayState : public GameState {
 
@@ -18,11 +21,12 @@ class PlayState : public GameState {
 	private:
 		GameStateManager * gameManager;
 		Camera * camera;
+		Car * car;
+		Sound * sound;
+		SquareWithTexture square;
 		float lastFrameTime;
-		void loadModels();
-		void moveCar(float angle, float frac);
-protected:
-	
+		float scrollWay;
+		void loadModels();	
 };
 
 #endif
