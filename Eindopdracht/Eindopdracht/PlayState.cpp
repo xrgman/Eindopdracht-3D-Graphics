@@ -5,6 +5,7 @@
 #include "CubeWithTexture.h"
 #include "Model.h"
 #include "Entity.h"
+#include "DrawUtil.h"
 
 Cube cube = Cube();
 std::vector<Entity *> entitys;
@@ -60,9 +61,9 @@ void PlayState::Update()
 	//Checking collision: 
 	for (int x = 1; x < entitys.size(); x++) {
 		entitys.at(x)->position.x = -29 + fmod(scrollWay,35)*1.5;
-		if (entitys.at(0)->hasCollision(entitys.at(x)->position) && !entitys.at(0)->dead) {
+		if (!(car->dead) && car->hasCollision(entitys.at(x)->position)) {
 			sound->playSound("music/crash.wav");
-			entitys.at(0)->dead = true;
+			car->dead = true;
 		}
 		//Respawning enemys:
 		if (entitys.at(x)->position.x > 10) {
@@ -90,6 +91,38 @@ void PlayState::Update()
 
 }
 
+void PlayState::Draw2D()
+{
+	//Setting right perspective: 
+	glMatrixMode(GL_PROJECTION);
+	glLoadIdentity();
+	glOrtho(0, 1000, 1000, 0, -10, 10);
+	glMatrixMode(GL_MODELVIEW);
+	glLoadIdentity();
+
+	glDisable(GL_LIGHTING);
+	glDisable(GL_DEPTH_TEST);
+	
+	//Drawing lives:
+	int offset = 0;
+	
+	glEnable(GL_TEXTURE_2D);
+		glPushMatrix();
+		glColor4f(0.6f, 0.6f, 1, 1);
+			gameManager->getTextureLoader()->bindPoliceCar();
+			for (int lives = 0; lives < car->getLives(); lives++) {
+				square = SquareWithTexture(5+offset, 5, 0, 60, 100, 0, 1);
+				square.Draw();
+				offset += 65;
+			}
+		glPopMatrix();
+	glDisable(GL_TEXTURE_2D);
+		
+	
+
+	glEnable(GL_LIGHTING);
+	glEnable(GL_DEPTH_TEST);
+}
 
 void PlayState::Draw()
 {
@@ -137,7 +170,10 @@ void PlayState::Draw()
 		glTranslatef(200, 200, 200);
 		cube.Draw();
 	glPopMatrix();
+
+	//Drawing 2D stuff:
 	glColor3f(255, 255, 255);
+	Draw2D();
 }
 
 
@@ -158,6 +194,4 @@ void PlayState::Idle()
 	if (specialKeys[GLUT_KEY_RIGHT] || keys['d'])
 		//camera->move(180, deltaTime*speed);
 		car->moveCar(180, deltaTime*speed);
-
-	
 }

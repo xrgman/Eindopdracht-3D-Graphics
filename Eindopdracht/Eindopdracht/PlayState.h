@@ -27,6 +27,7 @@ class PlayState : public GameState {
 		float lastFrameTime;
 		float scrollWay;
 		void loadModels();	
+		void Draw2D();
 };
 
 #endif

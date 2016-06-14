@@ -11,6 +11,7 @@ class TextureLoader {
 		void bindHighway();
 		void bindGround1();
 		void bindGround2();
+		void bindPoliceCar();
 	private:
 		std::vector<Texture*> textures;
 };
