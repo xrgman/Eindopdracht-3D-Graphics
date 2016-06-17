@@ -106,17 +106,25 @@ void PlayState::Draw2D()
 	//Drawing lives:
 	int offset = 0;
 	
-	glEnable(GL_TEXTURE_2D);
-		glPushMatrix();
-		glColor4f(0.6f, 0.6f, 1, 1);
-			gameManager->getTextureLoader()->bindPoliceCar();
-			for (int lives = 0; lives < car->getLives(); lives++) {
-				square = SquareWithTexture(5+offset, 5, 0, 60, 100, 0, 1);
-				square.Draw();
-				offset += 65;
-			}
-		glPopMatrix();
-	glDisable(GL_TEXTURE_2D);
+	//glEnable(GL_TEXTURE_2D);
+		
+		//glColor3f(1.0f, 0.1f, 1.0f);
+		//	//gameManager->getTextureLoader()->bindPoliceCar();
+		//	for (int lives = 0; lives < car->getLives(); lives++) {
+		//		/*square = SquareWithTexture(5+offset, 5, 0, 60, 100, 0, 1);
+		//		square.Draw();*/
+		//		glPushMatrix();
+		//		glScalef(12, 12, 12);
+		//		glRotatef(180, 0, 1, 0);
+		//		
+		//		glTranslatef(20, 0, 0);
+		//		
+		//		gameManager->getModelLoader()->getHeart()->draw();
+		//		glPopMatrix();
+		//		offset += 65;
+		//	}
+		
+	//(GL_TEXTURE_2D);
 		
 	
 
@@ -154,10 +162,20 @@ void PlayState::Draw()
 		square = SquareWithTexture(-5 + x, -0.92, 6, 10, 0, 10, 8);
 		square.Draw();
 		//drawing streetLight:
-		//glPushMatrix();
-		//	glTranslatef(-5 + x, -0.9, 5);
-		//	//gameManager->getModelLoader()->getLight()->draw();
-		//glPopMatrix();
+		glDisable(GL_TEXTURE_2D);
+		glPushMatrix();
+			glTranslatef(-5 + x, -0.9, 6);
+			glScalef(0.3, 0.3, 0.3);
+			glRotatef(90, 0, 1, 0);
+			gameManager->getModelLoader()->getLight()->draw();
+		glPopMatrix();
+		glPushMatrix();
+			glTranslatef(-5 + x, -0.9, -6);
+			glScalef(0.3, 0.3, 0.3);
+			glRotatef(-90, 0, 1, 0);
+			gameManager->getModelLoader()->getLight()->draw();
+		glPopMatrix();
+		glEnable(GL_TEXTURE_2D);
 	}
 	glDisable(GL_TEXTURE_2D);
 

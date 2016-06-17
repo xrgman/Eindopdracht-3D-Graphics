@@ -11,6 +11,7 @@ class ModdelLoader {
 		Model* getCar();
 		Model* getLight();
 		Model *getTaxi();
+		Model *getHeart();
 	private:
 		std::vector<Model*> models;
 };

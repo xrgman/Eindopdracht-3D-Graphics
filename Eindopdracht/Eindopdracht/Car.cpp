@@ -27,10 +27,13 @@ void Car::update(float elapsedTime)
 	//Dead animation:
 	if (dead && lives > 1)
 		deadAnimation++;
-	else if(dead && lives > 0)
+	else if (dead && lives > 0) {
 		lives--;
+		gameOver = true;
+	}
 	if (deadAnimation == 120) {
 		position.x = 0;
+		position.z = 0;
 		lives--;
 		deadAnimation++;
 		dead = false;

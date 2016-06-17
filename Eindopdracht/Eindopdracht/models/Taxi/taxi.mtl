@@ -1,112 +1,112 @@
-# 
-# 
-newmtl taxi_interior_taxi_interior_d.dds
-Ns 96.078431
-Ka 0.000000 0.000000 0.000000
-Kd 0.640000 0.640000 0.640000
-Ks 0.000000 0.000000 0.000000
-Ni 1.000000
-d 1.000000
-illum 1
-map_Kd taxi_interior_d.png
-
-
-newmtl taxi_glass_taxi_glass_d.dds
-Ns 96.078431
-Ka 0.000000 0.000000 0.000000
-Kd 0.640000 0.640000 0.640000
-Ks 0.000000 0.000000 0.000000
-Ni 1.000000
-d 0.000000
-illum 1
-map_Kd taxi_glass_d.png
-
+# Blender MTL File: 'taxi.blend'
+# Material Count: 10
 
 newmtl taxi_bumper_taxi_d.dds
-Ns 96.078431
+Ns 94.117647
 Ka 0.000000 0.000000 0.000000
 Kd 0.640000 0.640000 0.640000
 Ks 0.000000 0.000000 0.000000
+Ke 0.000000 0.000000 0.000000
 Ni 1.000000
 d 1.000000
-illum 1
+illum 2
 map_Kd taxi_d.png
-
-
-newmtl taxi_decal_taxi_decal_d.dds
-Ns 96.078431
-Ka 0.000000 0.000000 0.000000
-Kd 0.640000 0.640000 0.640000
-Ks 0.000000 0.000000 0.000000
-Ni 1.000000
-d 0.000000
-illum 1
-map_Kd taxi_decal_d.png
-
-
-newmtl taxi_wheel_taxi_wheel_d.dds
-Ns 96.078431
-Ka 0.000000 0.000000 0.000000
-Kd 0.640000 0.640000 0.640000
-Ks 0.000000 0.000000 0.000000
-Ni 1.000000
-d 1.000000
-illum 1
-map_Kd taxi_wheel_d.png
-
 
 newmtl taxi_chrome_taxi_chrome_d.dds
-Ns 96.078431
+Ns 94.117647
 Ka 0.000000 0.000000 0.000000
 Kd 0.640000 0.640000 0.640000
 Ks 0.000000 0.000000 0.000000
+Ke 0.000000 0.000000 0.000000
 Ni 1.000000
 d 1.000000
-illum 1
+illum 2
 map_Kd taxi_chrome_d.png
 
-
-newmtl taxi_underbody_taxi_underbody_d.dds
-Ns 96.078431
+newmtl taxi_decal_taxi_decal_d.dds
+Ns 94.117647
 Ka 0.000000 0.000000 0.000000
 Kd 0.640000 0.640000 0.640000
 Ks 0.000000 0.000000 0.000000
-Ni 1.000000
-d 1.000000
-illum 1
-map_Kd taxi_underbody_d.png
-
-
-newmtl taxi_tire_taxi_wheel_d.dds
-Ns 96.078431
-Ka 0.000000 0.000000 0.000000
-Kd 0.640000 0.640000 0.640000
-Ks 0.000000 0.000000 0.000000
-Ni 1.000000
-d 1.000000
-illum 1
-map_Kd taxi_wheel_d.png
-
-
-newmtl taxi_taxi_d.dds
-Ns 96.078431
-Ka 0.000000 0.000000 0.000000
-Kd 0.640000 0.640000 0.640000
-Ks 0.000000 0.000000 0.000000
-Ni 1.000000
-d 1.000000
-illum 1
-map_Kd taxi_d.png
-
-
-newmtl taxi_lights_taxi_lights_d.dds
-Ns 96.078431
-Ka 0.000000 0.000000 0.000000
-Kd 0.640000 0.640000 0.640000
-Ks 0.000000 0.000000 0.000000
+Ke 0.000000 0.000000 0.000000
 Ni 1.000000
 d 0.000000
-illum 1
+illum 2
+map_Kd taxi_damaged_decal_d.png
+
+newmtl taxi_glass_taxi_glass_d.dds
+Ns 94.117647
+Ka 0.000000 0.000000 0.000000
+Kd 0.640000 0.640000 0.640000
+Ks 0.000000 0.000000 0.000000
+Ke 0.000000 0.000000 0.000000
+Ni 1.000000
+d 0.000000
+illum 2
+map_Kd taxi_glass_d.png
+
+newmtl taxi_interior_taxi_interior_d.dds
+Ns 94.117647
+Ka 0.000000 0.000000 0.000000
+Kd 0.640000 0.640000 0.640000
+Ks 0.000000 0.000000 0.000000
+Ke 0.000000 0.000000 0.000000
+Ni 1.000000
+d 1.000000
+illum 2
+map_Kd taxi_interior_d.png
+
+newmtl taxi_lights_taxi_lights_d.dds
+Ns 94.117647
+Ka 0.000000 0.000000 0.000000
+Kd 0.640000 0.640000 0.640000
+Ks 0.000000 0.000000 0.000000
+Ke 0.000000 0.000000 0.000000
+Ni 1.000000
+d 0.000000
+illum 2
 map_Kd taxi_lights_d.png
 
+newmtl taxi_taxi_d.dds
+Ns 94.117647
+Ka 0.000000 0.000000 0.000000
+Kd 0.640000 0.640000 0.640000
+Ks 0.000000 0.000000 0.000000
+Ke 0.000000 0.000000 0.000000
+Ni 1.000000
+d 1.000000
+illum 2
+map_Kd taxi_d.png
 
+newmtl taxi_tire_taxi_wheel_d.dds
+Ns 94.117647
+Ka 0.000000 0.000000 0.000000
+Kd 0.640000 0.640000 0.640000
+Ks 0.000000 0.000000 0.000000
+Ke 0.000000 0.000000 0.000000
+Ni 1.000000
+d 1.000000
+illum 2
+map_Kd taxi_wheel_d.png
+
+newmtl taxi_underbody_taxi_underbody_d.dds
+Ns 94.117647
+Ka 0.000000 0.000000 0.000000
+Kd 0.640000 0.640000 0.640000
+Ks 0.000000 0.000000 0.000000
+Ke 0.000000 0.000000 0.000000
+Ni 1.000000
+d 1.000000
+illum 2
+map_Kd taxi_underbody_d.png
+
+newmtl taxi_wheel_taxi_wheel_d.dds
+Ns 94.117647
+Ka 0.000000 0.000000 0.000000
+Kd 0.640000 0.640000 0.640000
+Ks 0.000000 0.000000 0.000000
+Ke 0.000000 0.000000 0.000000
+Ni 1.000000
+d 1.000000
+illum 2
+map_Kd taxi_wheel_d.png
