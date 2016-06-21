@@ -1,6 +1,7 @@
 #include "GameStateManager.h"
 #include "GameState.h"
 #include "PlayState.h"
+#include "GameOverState.h"
 
 
 void GameStateManager::Init(Camera * camera)
@@ -13,6 +14,7 @@ void GameStateManager::Init(Camera * camera)
 	textureLoader = new TextureLoader();
 	//Adding states:
 	states.push_back(new PlayState());
+	states.push_back(new GameOverState());
 }
 
 void GameStateManager::Start()

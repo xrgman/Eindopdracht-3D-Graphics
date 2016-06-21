@@ -160,6 +160,7 @@
     <ClCompile Include="CubeWithTexture.cpp" />
     <ClCompile Include="DrawUtil.cpp" />
     <ClCompile Include="Entity.cpp" />
+    <ClCompile Include="GameOverState.cpp" />
     <ClCompile Include="GameStateManager.cpp" />
     <ClCompile Include="Main.cpp" />
     <ClCompile Include="Model.cpp" />
@@ -169,6 +170,7 @@
     <ClCompile Include="SquareWithTexture.cpp" />
     <ClCompile Include="Texture.cpp" />
     <ClCompile Include="TextureLoader.cpp" />
+    <ClCompile Include="Util.cpp" />
     <ClCompile Include="Vec2f.cpp" />
     <ClCompile Include="Vec3f.cpp" />
   </ItemGroup>
@@ -180,6 +182,7 @@
     <ClInclude Include="DrawUtil.h" />
     <ClInclude Include="Entity.h" />
     <ClInclude Include="Figure.h" />
+    <ClInclude Include="GameOverState.h" />
     <ClInclude Include="GameState.h" />
     <ClInclude Include="GameStateManager.h" />
     <ClInclude Include="ModelLoader.h" />
@@ -190,6 +193,7 @@
     <ClInclude Include="stb_image.h" />
     <ClInclude Include="Texture.h" />
     <ClInclude Include="TextureLoader.h" />
+    <ClInclude Include="Util.h" />
     <ClInclude Include="Vec2f.h" />
     <ClInclude Include="Vec3f.h" />
   </ItemGroup>

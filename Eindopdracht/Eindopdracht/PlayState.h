@@ -24,6 +24,9 @@ class PlayState : public GameState {
 		Car * car;
 		Sound * sound;
 		SquareWithTexture square;
+		std::vector<Entity *> entitys;
+		long long int score;
+		float time;
 		float lastFrameTime;
 		float scrollWay;
 		void loadModels();	

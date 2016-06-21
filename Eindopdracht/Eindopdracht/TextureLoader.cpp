@@ -8,6 +8,7 @@ void TextureLoader::loadTextures()
 	textures.push_back(new Texture("textures/ground2.jpg"));
 	textures.push_back(new Texture("textures/heart.png"));
 	textures.push_back(new Texture("textures/sky.jpg"));
+	textures.push_back(new Texture("textures/GameOver.png"));
 	//textures.push_back(new Texture("textures/policeCar.png"));
 }
 
@@ -39,4 +40,9 @@ void TextureLoader::bindPoliceCar()
 void TextureLoader::bindSky()
 {
 	textures.at(5)->bind();
+}
+
+void TextureLoader::bindGameOver()
+{
+	textures.at(6)->bind();
 }

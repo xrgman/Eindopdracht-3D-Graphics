@@ -28,6 +28,11 @@ class GameStateManager {
 		bool Running() { return m_running; }
 		void Quit() { m_running = false; }
 
+		//Game things:
+		long long int score;
+		float time;
+		int width, height;
+
 	private:
 		// the stack of states
 		std::vector<GameState*> states;
@@ -36,5 +41,6 @@ class GameStateManager {
 		TextureLoader *textureLoader;
 		short currentState;
 		bool m_running;
+		
 };
 #endif

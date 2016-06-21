@@ -14,7 +14,8 @@ bool specialKeys[255];
 
 
 void onDisplay() {
-	glClearColor(0.6f, 0.6f, 1, 1);
+	//glClearColor(0.6f, 0.6f, 1, 1);
+	glClearColor(0.0f, 0.0f, 0, 1);
 	glClear(GL_DEPTH_BUFFER_BIT | GL_COLOR_BUFFER_BIT);
 
 	//Drawing sky:
@@ -23,7 +24,8 @@ void onDisplay() {
 	glDisable(GL_DEPTH_TEST);
 	gameManager.getTextureLoader()->bindSky();
 		glBegin(GL_QUADS);
-			glColor4f(0.6f, 0.6f, 1, 1);
+			
+		glColor4f(0.6f, 0.6f, 1, 1);
 			glTexCoord2f(0, 0);				glVertex2f(0, 0);
 			glTexCoord2f(0, 1);				glVertex2f(width,0);
 			glTexCoord2f(1, 1);				glVertex2f(width,height);
@@ -64,6 +66,8 @@ void onIdle() {
 void onKeyboard(unsigned char key, int x, int y) {
 	if (key == 27)
 		exit(0);
+	if (key == ']')
+		gameManager.nextState();
 	keys[key] = true;
 	gameManager.HandleEvents(keys, specialKeys);
 }
@@ -107,6 +111,9 @@ int main(int argc, char* argv[]) {
 
 	width = 1920;
 	height = 1080;
+
+	gameManager.width = width;
+	gameManager.height = height;
 
 	glutInitDisplayMode(GLUT_RGB | GLUT_DOUBLE | GLUT_DEPTH);
 	glutInit(&argc, argv);

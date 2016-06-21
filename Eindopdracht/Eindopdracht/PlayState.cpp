@@ -6,9 +6,10 @@
 #include "Model.h"
 #include "Entity.h"
 #include "DrawUtil.h"
+#include "Util.h"
 
 Cube cube = Cube();
-std::vector<Entity *> entitys;
+
 
 void PlayState::Init(GameStateManager * game, Camera * camera)
 {
@@ -19,6 +20,7 @@ void PlayState::Init(GameStateManager * game, Camera * camera)
 	camera->posZ -= 2;
 	camera->rotX = 18.30030;
 	camera->rotY = -89.399963;
+	score = 0;
 	loadModels();
 	sound = new Sound();
 	sound->playMusic("music/background.wav");
@@ -42,8 +44,11 @@ void PlayState::loadModels()
 	entitys.push_back(enemyCar2);
 }
 
+
+
 void PlayState::Cleanup()
 {
+	entitys.clear();
 }
 
 void PlayState::HandleEvents(bool keys[], bool specialKeys[])
@@ -66,7 +71,8 @@ void PlayState::Update()
 			car->dead = true;
 		}
 		//Respawning enemys:
-		if (entitys.at(x)->position.x > 10) {
+		if (entitys.at(x)->position.x > 21) {
+			score += 20 + rand() % 10;
 			int side = rand() % 3;
 			switch (side) {
 				case 0:
@@ -84,11 +90,16 @@ void PlayState::Update()
 	//Dead animation:
 	if (car->dead)
 		car->position.x += 0.2;
+	//Game over
+	else if (car->gameOver == true) {
+		gameManager->score = score;
+		gameManager->time = time;
+		gameManager->nextState();
+	}
 
 	//updating entitys:
 	for (Entity* entity : entitys)
 		entity->update(GLUT_ELAPSED_TIME);
-
 }
 
 void PlayState::Draw2D()
@@ -106,28 +117,22 @@ void PlayState::Draw2D()
 	//Drawing lives:
 	int offset = 0;
 	
-	//glEnable(GL_TEXTURE_2D);
+	glEnable(GL_TEXTURE_2D);
+		glColor3f(1.0f, 1.0f, 1.0f);
+		gameManager->getTextureLoader()->bindPoliceCar();
+		for (int lives = 0; lives < car->getLives(); lives++) {
+			square = SquareWithTexture(5+offset, 5, 0, 60, 100, 0, 1);
+			square.Draw();
 		
-		//glColor3f(1.0f, 0.1f, 1.0f);
-		//	//gameManager->getTextureLoader()->bindPoliceCar();
-		//	for (int lives = 0; lives < car->getLives(); lives++) {
-		//		/*square = SquareWithTexture(5+offset, 5, 0, 60, 100, 0, 1);
-		//		square.Draw();*/
-		//		glPushMatrix();
-		//		glScalef(12, 12, 12);
-		//		glRotatef(180, 0, 1, 0);
-		//		
-		//		glTranslatef(20, 0, 0);
-		//		
-		//		gameManager->getModelLoader()->getHeart()->draw();
-		//		glPopMatrix();
-		//		offset += 65;
-		//	}
-		
-	//(GL_TEXTURE_2D);
-		
+			offset += 65;
+		}
 	
-
+	glDisable(GL_TEXTURE_2D);
+	
+	//Drawing score:
+	DrawUtil::drawString("Score: "+ std::to_string(score), 10, 160);
+	DrawUtil::drawString("Time: " + Util<float>::to_string_with_precision(time,5), 10, 140);
+		
 	glEnable(GL_LIGHTING);
 	glEnable(GL_DEPTH_TEST);
 }
@@ -194,12 +199,11 @@ void PlayState::Draw()
 	Draw2D();
 }
 
-
-
 void PlayState::Idle()
 {
 	float frameTime = glutGet(GLUT_ELAPSED_TIME) / 1000.0f;
 	float deltaTime = frameTime - lastFrameTime;
+	time += deltaTime;
 	lastFrameTime = frameTime;
 	const float speed = 5;
 	if (specialKeys[GLUT_KEY_UP] || keys['w']);

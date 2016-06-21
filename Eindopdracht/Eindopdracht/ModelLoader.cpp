@@ -7,6 +7,7 @@ void ModdelLoader::loadModels()
 	models.push_back(new Model("models/taxi/taxi.obj")); //The streetLight;
 	models.push_back(new Model("models/streetlight/StreetLamp.obj")); //The streetLight;
 	models.push_back(new Model("models/heart/Heart.obj"));
+	//models.push_back(new Model("models/Trees/tree.obj"));
 
 }
 
@@ -33,4 +34,9 @@ Model * ModdelLoader::getTaxi()
 Model * ModdelLoader::getHeart()
 {
 	return models.at(4);
+}
+
+Model * ModdelLoader::getTree1()
+{
+	return models.at(5);
 }

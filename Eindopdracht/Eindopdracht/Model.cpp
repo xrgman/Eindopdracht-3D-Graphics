@@ -227,14 +227,22 @@ Model::Model(std::string fileName)
 	for (ObjGroup *group : groups) {
 		for (Face &face : group->faces) {
 			for (auto &vertex : face.vertices) {
-				group->vecs.push_back(Vec(vertices[vertex.position].x, vertices[vertex.position].y, vertices[vertex.position].z, normals[vertex.normal].x, normals[vertex.normal].y, normals[vertex.normal].z, texcoords[vertex.texcoord].x, texcoords[vertex.texcoord].y));
+ 				group->vecs.push_back(Vec(vertices[vertex.position].x, vertices[vertex.position].y, vertices[vertex.position].z, normals[vertex.normal].x, normals[vertex.normal].y, normals[vertex.normal].z, texcoords[vertex.texcoord].x, texcoords[vertex.texcoord].y));
 			}
 		}
 	}
+	vertices.clear();
+	normals.clear();
+	texcoords.clear();
 }
 
 Model::~Model(void)
 {
+	vertices.clear();
+	normals.clear();
+	texcoords.clear();
+	groups.clear();
+	materials.clear();
 }
 
 

@@ -10,7 +10,6 @@ Ke 0.857600 0.819807 0.489375
 Ni 1.000000
 d 0.222222
 illum 3
-map_Bump -bm 5.000000 Glass.jpg
 map_Kd  Glass.jpg
 
 newmtl Material.002
@@ -34,7 +33,6 @@ Ke 0.000000 0.000000 0.000000
 Ni 1.000000
 d 1.000000
 illum 3
-map_Bump -bm 5.000000 grey-concrete-texture.jpg
 map_Kd  grey-concrete-texture.jpg
 
 newmtl None
@@ -44,5 +42,4 @@ Kd 0.8 0.8 0.8
 Ks 0.8 0.8 0.8
 d 1
 illum 2
-map_Bump -bm 5.000000 metal.jpg
 map_Kd  metal.jpg
