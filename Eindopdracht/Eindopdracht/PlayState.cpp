@@ -8,16 +8,13 @@
 #include "DrawUtil.h"
 #include "Util.h"
 
-Cube cube = Cube();
-
-
 void PlayState::Init(GameStateManager * game, Camera * camera)
 {
 	this->gameManager = game;
 	this->camera = camera;
 	camera->posX = -5.104399;
 	camera->posY = 0.142510;
-	camera->posZ -= 2;
+	camera->posZ = -2;
 	camera->rotX = 18.30030;
 	camera->rotY = -89.399963;
 	score = 0;
@@ -44,11 +41,14 @@ void PlayState::loadModels()
 	entitys.push_back(enemyCar2);
 }
 
-
-
 void PlayState::Cleanup()
 {
 	entitys.clear();
+	car = NULL;
+	score = 0;
+	time = 0; 
+	scrollWay = 0;
+	sound->stop();
 }
 
 void PlayState::HandleEvents(bool keys[], bool specialKeys[])
@@ -90,6 +90,7 @@ void PlayState::Update()
 	//Dead animation:
 	if (car->dead)
 		car->position.x += 0.2;
+
 	//Game over
 	else if (car->gameOver == true) {
 		gameManager->score = score;
@@ -118,15 +119,13 @@ void PlayState::Draw2D()
 	int offset = 0;
 	
 	glEnable(GL_TEXTURE_2D);
-		glColor3f(1.0f, 1.0f, 1.0f);
+		glColor4f(1.0f, 1.0f, 1.0f, 0);
 		gameManager->getTextureLoader()->bindPoliceCar();
 		for (int lives = 0; lives < car->getLives(); lives++) {
 			square = SquareWithTexture(5+offset, 5, 0, 60, 100, 0, 1);
 			square.Draw();
-		
 			offset += 65;
 		}
-	
 	glDisable(GL_TEXTURE_2D);
 	
 	//Drawing score:
@@ -143,6 +142,7 @@ void PlayState::Draw()
 	glEnable(GL_TEXTURE_2D);
 	for (float x = -40 + fmod(scrollWay,10); x <= 40 + fmod(scrollWay, 10); x += 10) {
 		//Drawing highway:
+		glDisable(GL_LIGHTING);
 		gameManager->getTextureLoader()->bindHighway();
 		square = SquareWithTexture(-5 + x, -1, -5, 10, 0, 10,2);
 		square.Draw();
@@ -167,6 +167,7 @@ void PlayState::Draw()
 		square = SquareWithTexture(-5 + x, -0.92, 6, 10, 0, 10, 8);
 		square.Draw();
 		//drawing streetLight:
+		glEnable(GL_LIGHTING);
 		glDisable(GL_TEXTURE_2D);
 		glPushMatrix();
 			glTranslatef(-5 + x, -0.9, 6);
@@ -188,12 +189,6 @@ void PlayState::Draw()
 	for (Entity* entity : entitys)
 		entity->Draw();
 
-	//Light fix:
-	glPushMatrix();
-		glTranslatef(200, 200, 200);
-		cube.Draw();
-	glPopMatrix();
-
 	//Drawing 2D stuff:
 	glColor3f(255, 255, 255);
 	Draw2D();
@@ -205,7 +200,7 @@ void PlayState::Idle()
 	float deltaTime = frameTime - lastFrameTime;
 	time += deltaTime;
 	lastFrameTime = frameTime;
-	const float speed = 5;
+	const float speed = 6;
 	if (specialKeys[GLUT_KEY_UP] || keys['w']);
 		//camera->move(90, deltaTime*speed);
 	if (specialKeys[GLUT_KEY_DOWN] || keys['s']);

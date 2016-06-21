@@ -15,7 +15,7 @@ bool specialKeys[255];
 
 void onDisplay() {
 	//glClearColor(0.6f, 0.6f, 1, 1);
-	glClearColor(0.0f, 0.0f, 0, 1);
+	glClearColor(0, 0, 0, 1);
 	glClear(GL_DEPTH_BUFFER_BIT | GL_COLOR_BUFFER_BIT);
 
 	//Drawing sky:
@@ -48,7 +48,7 @@ void onDisplay() {
 	glTranslatef(camera.posX, camera.posZ, camera.posY);
 
 	//Setting light:
-	float pos[4] = { 0.5, 1, -1, 0 };
+	float pos[4] = { 0.5, 1, 0, 0 };
 	glLightfv(GL_LIGHT0, GL_POSITION, pos);
 
 	//Draw the game state:

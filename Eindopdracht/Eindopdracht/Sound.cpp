@@ -1,6 +1,5 @@
 
 #include "Sound.h"
-#include "SFML/Audio.hpp"
 #include <thread>
 
 Sound::Sound()
@@ -19,6 +18,13 @@ void Sound::playSound(std::string filePath)
 	soundThread.detach();
 }
 
+void Sound::stop()
+{
+	if (globalSound.getStatus()) {
+		globalSound.stop();
+	}
+}
+
 void Sound::soundThread(std::string filePath)
 {
 	sf::SoundBuffer soundbuf;
@@ -33,10 +39,9 @@ void Sound::soundThread(std::string filePath)
 void Sound::soundLoopThread(std::string filepath)
 {
 	sf::SoundBuffer soundbuf;
-	sf::Sound sound;
 	soundbuf.loadFromFile(filepath.c_str());
-	sound.setBuffer(soundbuf);
-	sound.setLoop(true);
-	sound.play();
-	while (sound.getStatus() != sf::Sound::Status::Stopped);
+	globalSound.setBuffer(soundbuf);
+	globalSound.setLoop(true);
+	globalSound.play();
+	while (globalSound.getStatus() != sf::Sound::Status::Stopped);
 }

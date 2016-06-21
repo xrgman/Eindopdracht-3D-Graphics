@@ -3,6 +3,7 @@
 
 #include "GameState.h"
 #include "Camera.h"
+#include "Sound.h"
 
 class GameOverState : public GameState {
 
@@ -21,7 +22,7 @@ private:
 	Camera * camera;
 	int animationCounter;
 	float red, green,blue;
-	
+	Sound *sound;
 };
 
 #endif

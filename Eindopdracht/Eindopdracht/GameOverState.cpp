@@ -7,6 +7,8 @@ void GameOverState::Init(GameStateManager * game, Camera * camera)
 {
 	this->gameManager = game;
 	this->camera = camera;
+	sound = new Sound();
+	sound->playMusic("music/end.wav");
 	animationCounter++;
 	red = 1.0f;
 	green = 0.0f;
@@ -15,6 +17,7 @@ void GameOverState::Init(GameStateManager * game, Camera * camera)
 
 void GameOverState::Cleanup()
 {
+	sound->stop();
 }
 
 void GameOverState::HandleEvents(bool keys[], bool specialKeys[])
@@ -42,7 +45,6 @@ void GameOverState::Update()
 	else
 		animationCounter = 0;
 	animationCounter++;
-	
 }
 
 void GameOverState::Draw()
@@ -58,13 +60,10 @@ void GameOverState::Draw()
 	glDisable(GL_DEPTH_TEST);
 	
 	glEnable(GL_TEXTURE_2D);
-	glColor3f(red, green, blue);
-	gameManager->getTextureLoader()->bindGameOver();
-	SquareWithTexture square = SquareWithTexture(0, 0, 0, 1000, gameManager->height, 0, 1);
-	square.Draw();
-
-	
-
+		glColor3f(red, green, blue);
+		gameManager->getTextureLoader()->bindGameOver();
+		SquareWithTexture square = SquareWithTexture(0, 0, 0, 1000, gameManager->height, 0, 1);
+		square.Draw();
 	glDisable(GL_TEXTURE_2D);
 
 	//Drawing score:

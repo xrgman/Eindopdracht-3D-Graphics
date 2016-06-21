@@ -31,6 +31,7 @@ void GameStateManager::Cleanup()
 void GameStateManager::nextState()
 {
 	if (currentState < states.size() -1) {
+		states.at(currentState)->Cleanup();
 		currentState++;
 		states.at(currentState)->Init(this,camera);
 	}
@@ -39,6 +40,7 @@ void GameStateManager::nextState()
 void GameStateManager::previousState()
 {
 	if (currentState > 0) {
+		states.at(currentState)->Cleanup();
 		currentState--;
 		states.at(currentState)->Init(this,camera);
 	}

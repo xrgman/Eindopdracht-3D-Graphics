@@ -49,6 +49,8 @@ void CubeWithTexture::Intialize()
 void CubeWithTexture::Draw()
 {
 	glPushMatrix();
+	glEnable(GL_COLOR_MATERIAL);
+	glColorMaterial(GL_FRONT_AND_BACK, GL_AMBIENT_AND_DIFFUSE);
 	glEnableClientState(GL_TEXTURE_COORD_ARRAY);
 	glEnableClientState(GL_VERTEX_ARRAY);
 	glEnableClientState(GL_NORMAL_ARRAY);
@@ -66,5 +68,6 @@ void CubeWithTexture::Draw()
 	glDisableClientState(GL_TEXTURE_COORD_ARRAY);
 	glDisableClientState(GL_VERTEX_ARRAY);
 	glDisableClientState(GL_NORMAL_ARRAY);
+	glDisable(GL_COLOR_MATERIAL);
 	glPopMatrix();
 }
