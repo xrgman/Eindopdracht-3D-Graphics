@@ -11,6 +11,13 @@ Car::Car(Model * model) : Entity(model)
 	this->deadAnimation = false;
 }
 
+Car::~Car()
+{
+	lives = 3;
+	gameOver = false;
+	dead = false;
+}
+
 void Car::moveCar(float angle, float frac)
 {
 	if ((angle == 270 && position.z < 3.8) || (angle == 180 && position.z > -3.8))

@@ -7,6 +7,7 @@
 class Car : public Entity {
 	public:
 		Car(Model* model);
+		~Car();
 		void moveCar(float angle, float frac);
 		int getLives();
 		virtual void update(float elapsedTime) override;

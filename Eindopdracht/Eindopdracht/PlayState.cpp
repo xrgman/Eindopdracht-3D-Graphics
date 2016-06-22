@@ -49,6 +49,8 @@ void PlayState::Cleanup()
 	time = 0; 
 	scrollWay = 0;
 	sound->stop();
+	memset(keys, 0, sizeof(keys));
+	memset(specialKeys, 0, sizeof(specialKeys));
 }
 
 void PlayState::HandleEvents(bool keys[], bool specialKeys[])
@@ -119,13 +121,16 @@ void PlayState::Draw2D()
 	int offset = 0;
 	
 	glEnable(GL_TEXTURE_2D);
-		glColor4f(1.0f, 1.0f, 1.0f, 0);
-		gameManager->getTextureLoader()->bindPoliceCar();
-		for (int lives = 0; lives < car->getLives(); lives++) {
-			square = SquareWithTexture(5+offset, 5, 0, 60, 100, 0, 1);
-			square.Draw();
-			offset += 65;
-		}
+		glEnable(GL_BLEND);
+			glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
+			glColor4f(1.0f, 1.0f, 1.0f, 1);
+			gameManager->getTextureLoader()->bindPoliceCar();
+			for (int lives = 0; lives < car->getLives(); lives++) {
+				square = SquareWithTexture(5+offset, 5, 0, 60, 100, 0, 1);
+				square.Draw();
+				offset += 65;
+			}
+		glDisable(GL_BLEND);
 	glDisable(GL_TEXTURE_2D);
 	
 	//Drawing score:

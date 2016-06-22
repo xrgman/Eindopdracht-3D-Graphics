@@ -18,6 +18,12 @@ void GameOverState::Init(GameStateManager * game, Camera * camera)
 void GameOverState::Cleanup()
 {
 	sound->stop();
+	memset(keys, 0, sizeof(keys));
+	memset(specialKeys, 0, sizeof(specialKeys));
+	red = 1.0f;
+	green = 0.0f;
+	blue = 0.0f;
+	animationCounter = 0;
 }
 
 void GameOverState::HandleEvents(bool keys[], bool specialKeys[])
