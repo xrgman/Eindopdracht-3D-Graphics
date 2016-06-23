@@ -124,7 +124,7 @@ void PlayState::Draw2D()
 		glEnable(GL_BLEND);
 			glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
 			glColor4f(1.0f, 1.0f, 1.0f, 1);
-			gameManager->getTextureLoader()->bindPoliceCar();
+			gameManager->getTextureLoader()->bindHeart();
 			for (int lives = 0; lives < car->getLives(); lives++) {
 				square = SquareWithTexture(5+offset, 5, 0, 60, 100, 0, 1);
 				square.Draw();
@@ -152,7 +152,7 @@ void PlayState::Draw()
 		square = SquareWithTexture(-5 + x, -1, -5, 10, 0, 10,2);
 		square.Draw();
 		//drawing sideOfway:
-		gameManager->getTextureLoader()->bindGround2();
+		gameManager->getTextureLoader()->bindSideway();
 		//Top - right:
 		square = SquareWithTexture(-5 + x, -0.9, 5, 10, 0, 1,1);
 		square.Draw();
@@ -186,6 +186,19 @@ void PlayState::Draw()
 			glRotatef(-90, 0, 1, 0);
 			gameManager->getModelLoader()->getLight()->draw();
 		glPopMatrix();
+		//draw trees:
+		glEnable(GL_BLEND);
+			glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
+			if (1) { //draw tree on the right;
+			
+				glPushMatrix();
+					glTranslatef(-5 + x, -0.9, -7 );
+					glScalef(1.2, 1.2, 1.2);
+					gameManager->getModelLoader()->getBush()->draw();
+				glPopMatrix();
+				
+			}
+		glDisable(GL_BLEND);
 		glEnable(GL_TEXTURE_2D);
 	}
 	glDisable(GL_TEXTURE_2D);

@@ -2,14 +2,12 @@
 
 void TextureLoader::loadTextures()
 {
-	textures.push_back(new Texture("textures/grass.jpg"));
-	textures.push_back(new Texture("textures/highway2.jpg"));
-	textures.push_back(new Texture("textures/ground1.jpg"));
-	textures.push_back(new Texture("textures/ground2.jpg"));
+	textures.push_back(new Texture("textures/Grass.jpg"));
+	textures.push_back(new Texture("textures/highway.jpg"));
+	textures.push_back(new Texture("textures/Sideway.jpg"));
 	textures.push_back(new Texture("textures/heart.png"));
 	textures.push_back(new Texture("textures/sky.jpg"));
 	textures.push_back(new Texture("textures/GameOver.png"));
-	//textures.push_back(new Texture("textures/policeCar.png"));
 }
 
 void TextureLoader::bindGrass()
@@ -22,27 +20,22 @@ void TextureLoader::bindHighway()
 	textures.at(1)->bind();
 }
 
-void TextureLoader::bindGround1()
+void TextureLoader::bindSideway()
 {
 	textures.at(2)->bind();
 }
 
-void TextureLoader::bindGround2()
+void TextureLoader::bindHeart()
 {
 	textures.at(3)->bind();
 }
 
-void TextureLoader::bindPoliceCar()
+void TextureLoader::bindSky()
 {
 	textures.at(4)->bind();
 }
 
-void TextureLoader::bindSky()
-{
-	textures.at(5)->bind();
-}
-
 void TextureLoader::bindGameOver()
 {
-	textures.at(6)->bind();
+	textures.at(5)->bind();
 }

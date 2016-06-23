@@ -9,9 +9,8 @@ class TextureLoader {
 		void loadTextures();
 		void bindGrass();
 		void bindHighway();
-		void bindGround1();
-		void bindGround2();
-		void bindPoliceCar();
+		void bindSideway();
+		void bindHeart();
 		void bindSky();
 		void bindGameOver();
 	private:

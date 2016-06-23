@@ -22,11 +22,13 @@ PlayState.cpp(178): warning C4305: 'argument': truncation from 'double' to 'GLfl
 PlayState.cpp(179): warning C4305: 'argument': truncation from 'double' to 'GLfloat'
 PlayState.cpp(184): warning C4305: 'argument': truncation from 'double' to 'GLfloat'
 PlayState.cpp(185): warning C4305: 'argument': truncation from 'double' to 'GLfloat'
-PlayState.cpp(209): warning C4390: ';': empty controlled statement found; is this the intent?
-PlayState.cpp(211): warning C4390: ';': empty controlled statement found; is this the intent?
+PlayState.cpp(195): warning C4305: 'argument': truncation from 'double' to 'GLfloat'
+PlayState.cpp(196): warning C4305: 'argument': truncation from 'double' to 'GLfloat'
+PlayState.cpp(222): warning C4390: ';': empty controlled statement found; is this the intent?
+PlayState.cpp(224): warning C4390: ';': empty controlled statement found; is this the intent?
   Generating code
-  1 of 1586 functions ( 0.1%) were compiled, the rest were copied from previous compilation.
+  1 of 1587 functions ( 0.1%) were compiled, the rest were copied from previous compilation.
     0 functions were new in current compilation
-    1 functions had inline decision re-evaluated but remain unchanged
+    20 functions had inline decision re-evaluated but remain unchanged
   Finished generating code
   Eindopdracht.vcxproj -> C:\Users\Beast\Documents\Github\Eindopdracht-3D-Graphics\Eindopdracht\Release\Eindopdracht.exe

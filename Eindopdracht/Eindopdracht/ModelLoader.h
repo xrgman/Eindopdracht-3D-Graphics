@@ -7,12 +7,11 @@
 class ModdelLoader {
 	public:
 		void loadModels();
-		Model* getPlant();
 		Model* getCar();
 		Model* getLight();
 		Model *getTaxi();
-		Model *getHeart();
 		Model *getTree1();
+		Model *getBush();
 	private:
 		std::vector<Model*> models;
 };

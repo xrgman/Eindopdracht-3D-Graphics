@@ -58,7 +58,7 @@ void GameOverState::Draw()
 	//Setting right perspective: 
 	glMatrixMode(GL_PROJECTION);
 	glLoadIdentity();
-	glOrtho(0, 1000, 1000, 0, -10, 10);
+	glOrtho(0, gameManager->width, gameManager->height, 0, -10, 10);
 	glMatrixMode(GL_MODELVIEW);
 	glLoadIdentity();
 
@@ -68,14 +68,14 @@ void GameOverState::Draw()
 	glEnable(GL_TEXTURE_2D);
 		glColor3f(red, green, blue);
 		gameManager->getTextureLoader()->bindGameOver();
-		SquareWithTexture square = SquareWithTexture(0, 0, 0, 1000, gameManager->height, 0, 1);
+		SquareWithTexture square = SquareWithTexture(0, 0, 0, gameManager->width, gameManager->height, 0, 1);
 		square.Draw();
 	glDisable(GL_TEXTURE_2D);
 
 	//Drawing score:
-	DrawUtil::drawString("Score: " + std::to_string(gameManager->score) + " Points", 450, gameManager->height - 400);
-	DrawUtil::drawString("Time: " + Util<float>::to_string_with_precision(gameManager->time,5) + " Seconds", 450, gameManager->height - 380);
-	DrawUtil::drawString("Press X to exit or R to restart", 420, gameManager->height - 100);
+	DrawUtil::drawString("Score: " + std::to_string(gameManager->score) + " Points", gameManager->width / 2 - 60, gameManager->height - 400);
+	DrawUtil::drawString("Time: " + Util<float>::to_string_with_precision(gameManager->time,5) + " Seconds", gameManager->width / 2 - 60, gameManager->height - 380);
+	DrawUtil::drawString("Press X to exit or R to restart", gameManager->width/2-100, gameManager->height - 100);
 
 	glEnable(GL_LIGHTING);
 	glEnable(GL_DEPTH_TEST);
